@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="favicon.ico" />
+
+    <title>Employee Management</title>
+    
+    <!-- Loading animation -->
+    <script src="js/pace.min.js"></script>
+
+    <!-- Bootstrap core CSS and Material Bootstrap -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/font-awesome.min.css}" rel="stylesheet" />
+    <link th:href="@{css/bootstrap-material-design.css}" rel="stylesheet}" />
+    <link th:href="@{css/ripples.min.css}" rel="stylesheet" />
+    <link th:href="@{css/material-scrolltop.css}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{css/material-blog.css}" rel="stylesheet" />
+
+    <!-- Fonts -->
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700}" rel="stylesheet" />
+    <link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet" />
+
+  </head>
+
+  <body>
+
+    <br />
+	<div class="container ">
+
+      <div class="row">
+
+        <div class="col-sm-12 blog-main">
+
+          <div class="row">
+            <div class="col-md-12">
+              <section class="blog-post">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="blog-post-content">
+                    
+                      <div th:replace="header::header"></div> &nbsp; &nbsp;
+                      
+                      
+                          <div class="navbar-collapse collapse navbar-responsive-collapse"> 
+                            
+                            <form th:action="@{/searchEmployee}" th:object="${employee}"
+           					 	method="POST">
+                              <div class="form-group">
+                              
+                            	<div align="left">
+                            		<a th:href="@{/employee}" class="glyphicon glyphicon-plus btn-primary btn-lg"> ADD EMPLOYEE</a>
+                            		<a th:href="@{/cleanEmployee}" class="glyphicon glyphicon-erase btn-primary btn-lg"> CLEAR FILTERING</a>
+                            		
+                              		<label class="glyphicon glyphicon-search">
+                              			<input type="text" th:field="*{name}" placeholder="Search all" />
+                              		</label>
+                              		
+                              		<div align="right">
+                              			<input class="btn btn-danger" type="submit" value="Search" />
+                              		</div>
+                            	</div>
+                            
+                              	
+                                
+                              </div>
+                            </form>
+                            
+                          </div>
+						  
+                      
+						
+						  <table class="table table-condensed">
+							<thead>
+							  <tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Last Name</th>
+								<th>E-Mail</th>
+								<th>Office Code</th>
+								<th>Job Title</th>
+								<th>Actions</th>
+							  </tr>
+							</thead>
+							<tbody>
+								<tr th:each="employee : ${employees}">
+                   			 		<td th:utext="${employee.id}">...</td>
+                    				<td th:utext="${employee.name}">...</td>
+                    				<td th:utext="${employee.lastname}">...</td>
+                    				<td th:utext="${employee.email}">...</td>
+                    				<td th:utext="${employee.officeCode}">...</td>
+                    				<td th:utext="${employee.jobTitle}">...</td>
+                    				<td>
+                        				<a th:href="@{/updateEmployee/{id} (id=${employee.id})}">
+											<span class="glyphicon glyphicon-edit btn btn-success"></span>
+										</a>
+										<a th:href="@{/queryEmployee/{id} (id=${employee.id})}">
+											<span class="glyphicon glyphicon-eye-open btn btn-info"></span>
+										</a>
+										<a th:href="@{/employee/deleteEmployee/{id} (id=${employee.id})}">
+											<span class="glyphicon glyphicon-trash btn btn-danger"></span>
+										</a>       
+                    				</td>
+                			  	</tr>
+                			  	</tbody>
+						  </table>
+						  
+						  <div th:replace="footer::footer"></div>
+						  
+                    </div>
+                    
+                  </div>
+                </div>
+              </section><!-- /.blog-post -->
+            </div>
+          </div>
+
+        </div><!-- /.blog-main -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    
+
+    <button class="material-scrolltop primary" type="button"></button>
+
+    <script th:src="@{js/jquery-1.11.3.min.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/ripples.min.js}"></script>
+    <script th:src="@{js/material.min.js}"></script>
+    <script th:src="@{js/material-scrolltop.js}"></script>
+    <script th:src="@{js/main.js}"></script>
+
+    <script>
+      $.material.init();
+      $('body').materialScrollTop();
+    </script>
+	
+  </body>
+</html>
